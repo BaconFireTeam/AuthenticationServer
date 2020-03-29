@@ -1,55 +1,121 @@
 package com.baconfire.onboardwebapp.security.springsecurityjwt.domain;
 
+import lombok.*;
+
 import javax.persistence.*;
+import java.io.Serializable;
+
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 
 @Entity
-@Table(name = "User")
-public class User {
+@Table(name="User")
+public class User implements Serializable {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Id")
     private int id;
-    private String userName;
+
+    @Column(name="UserName")
+    private String username;
+
+    @Column(name="Email")
+    private String email;
+
+    @Column(name="Password")
     private String password;
-    private boolean active;
-    private String roles;
 
-    public int getId() {
-        return id;
-    }
+//    @Column(name="PersonID")
+//    private int personID;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    @OneToOne
+    @JoinColumn(name = "PersonID")
+    private Person person;
 
-    public String getUserName() {
-        return userName;
-    }
+    @Column(name="CreateDate")
+    private String createDate;
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+    @Column(name="ModificationDate")
+    private String modificationDate;
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
+    public User(String username, String email, String password, Person person, String createDate, String modificationDate) {
+        this.username = username;
+        this.email = email;
         this.password = password;
+        this.person = person;
+        this.createDate = createDate;
+        this.modificationDate = modificationDate;
     }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public String getRoles() {
-        return roles;
-    }
-
-    public void setRoles(String roles) {
-        this.roles = roles;
-    }
+//    public User() {
+//    }
+//
+//    public User(int ID, String userName, String email, String password, int personID, String createDate, String modificationDate) {
+//        this.ID = ID;
+//        UserName = userName;
+//        Email = email;
+//        Password = password;
+//        PersonID = personID;
+//        CreateDate = createDate;
+//        ModificationDate = modificationDate;
+//    }
+//
+//    public int getID() {
+//        return ID;
+//    }
+//
+//    public void setID(int ID) {
+//        this.ID = ID;
+//    }
+//
+//    public String getUserName() {
+//        return UserName;
+//    }
+//
+//    public void setUserName(String userName) {
+//        UserName = userName;
+//    }
+//
+//    public String getEmail() {
+//        return Email;
+//    }
+//
+//    public void setEmail(String email) {
+//        Email = email;
+//    }
+//
+//    public String getPassword() {
+//        return Password;
+//    }
+//
+//    public void setPassword(String password) {
+//        Password = password;
+//    }
+//
+//    public int getPersonID() {
+//        return PersonID;
+//    }
+//
+//    public void setPersonID(int personID) {
+//        PersonID = personID;
+//    }
+//
+//    public String getCreateDate() {
+//        return CreateDate;
+//    }
+//
+//    public void setCreateDate(String createDate) {
+//        CreateDate = createDate;
+//    }
+//
+//    public String getModificationDate() {
+//        return ModificationDate;
+//    }
+//
+//    public void setModificationDate(String modificationDate) {
+//        ModificationDate = modificationDate;
+//    }
 }
