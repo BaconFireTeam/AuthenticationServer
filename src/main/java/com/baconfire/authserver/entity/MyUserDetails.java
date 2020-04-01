@@ -18,12 +18,14 @@ public class MyUserDetails implements UserDetails {
     private String password;
     private boolean active;
     private List<SimpleGrantedAuthority> authorities;
+    private int id;
 
     public MyUserDetails(User user) {
         this.userName = user.getUsername();
         this.password = user.getPassword();
         this.active = "Y".equals(user.getActive());
         this.authorities = new ArrayList<>();
+        this.id = user.getPerson().getId();
     }
 
     @Override
